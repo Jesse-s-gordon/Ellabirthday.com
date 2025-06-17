@@ -1,0 +1,1306 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Ella's Birthday Pinterest Board</title>
+  <link rel="stylesheet" href="style.css">
+  <link href="https://fonts.googleapis.com/css2?family=Pacifico&family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
+</head>
+<body>
+  <canvas id="confetti-canvas" style="position:fixed;top:0;left:0;width:100vw;height:100vh;pointer-events:none;z-index:999;display:none;"></canvas>
+  <nav class="navbar">
+    <div class="nav-logo">🎉 EllasBirthday.com</div>
+    <ul class="nav-links">
+      <li id="nav-home">Home</li>
+      <li id="nav-adventure">Adventure</li>
+      <li id="nav-pictures">Pictures</li>
+      <li id="nav-blog">Blog</li>
+    </ul>
+    <div class="nav-search">
+      <input type="text" placeholder="Search">
+      <span class="search-icon">🔍</span>
+    </div>
+  </nav>
+  <section id="intro-section" class="intro-section" style="display:none;">
+    <div class="intro-photo-container">
+      <img src="ella-intro.jpg" alt="Ella at counter" class="intro-photo">
+      <div class="thought-bubble">I think I'm starting to like this game</div>
+      <button id="intro-start-btn" class="start-btn">Start</button>
+    </div>
+  </section>
+  <section id="home-section" class="home-section">
+    <div class="home-left">
+      <img src="ella-photo.jpg" alt="Ella smiling on a boat" class="ella-photo">
+      <div class="love-message">Made with love from Toronto to Dallas 💌</div>
+    </div>
+    <div class="home-right">
+      <h1 class="home-title">This is....<br>Ella's 22 Birthday</h1>
+      <h2 class="home-subtitle easy-font">Buckle up Folks</h2>
+      <p class="home-message">Welcome to EllasBirthday.com, here you will find a small treasure hunt filled with Ella-themed puzzles leading to your birthday present!<br><br>There are also some awesome pictures and memories along the way as well.<br>Enjoy, Diva,<br>Love you lots<br>- Jesse</p>
+    </div>
+  </section>
+  <main id="masonry-board" class="masonry-board" style="display:none;">
+    <section id="wordle-card" class="card wordle-card">
+      <h2>Wordle Challenge</h2>
+      <p>Guess the special 5-letter word!</p>
+      <div id="wordle-placeholder">[Wordle game will appear here]</div>
+      <button id="wordle-next-btn" class="next-btn" style="margin: 1.5rem auto 0; display: block; position: relative; bottom: 0;">Next</button>
+    </section>
+    <section id="sudoku-instructions-card" class="card sudoku-instructions-card" style="display:none; flex-direction:column; align-items:center; justify-content:center;">
+      <div style="max-width:600px; margin:2rem auto; text-align:center; font-size:1.3rem; font-family:Montserrat, sans-serif;">
+        <div style="font-size:2rem; margin-bottom:1.2rem;">🎁 Birthday Puzzle Instructions 🎁</div>
+        <ol style="text-align:left; margin:0 auto 1.5rem auto; max-width:420px; font-size:1.1rem;">
+          <li>Solve the Sudoku puzzle shown.</li>
+          <li>Once solved, take the numbers from the peach-colored boxes.</li>
+          <li>Match each number to a letter in the alphabet (A=1, B=2, ..., Z=26).</li>
+          <li>Put the letters together to reveal the surprise message.</li>
+        </ol>
+        <div style="margin-top:1.2rem; font-size:1.1rem;">Then... continue on the webpage for the next part of your adventure!<br>Hint: You're headed somewhere musical 🎶</div>
+      </div>
+      <button id="sudoku-instructions-next-btn" class="next-btn" style="margin-top:2rem;">Next</button>
+    </section>
+    <section id="sudoku-card" class="card sudoku-card" style="display:none;">
+      <h2>Sudoku Surprise</h2>
+      <p>Solve the puzzle to reveal a secret message!</p>
+      <div id="sudoku-placeholder">[Sudoku puzzle will appear here]</div>
+    </section>
+    <section id="paint-card" class="card paint-card" style="display:none;">
+      <h2>Paint-by-Numbers</h2>
+      <p>Reveal your concert surprise by painting the image!</p>
+      <div id="paint-placeholder">[Paint-by-numbers will appear here]</div>
+    </section>
+    <section id="final-card" class="card final-card" style="display:none; flex-direction:column; align-items:center; justify-content:center; min-height:600px;">
+      <div style="font-size:2rem; font-family:Montserrat,sans-serif; font-weight:bold; color:#2563eb; margin-bottom:2rem; text-align:center; max-width:600px;">
+        After playing the Goo Goo Dolls - Iris, Live in Buffalo as many times as you have, its only right you get to see them live :)<br>Have the best time <span style="font-size:2.2rem; color:#e25555;">❤️</span>
+      </div>
+      <div style="margin-bottom:2rem;">
+        <svg width="340" height="340" viewBox="0 0 240 240" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <rect x="40" y="80" width="160" height="120" rx="18" fill="#ffe066" stroke="#e2a800" stroke-width="6"/>
+          <rect x="110" y="80" width="20" height="120" fill="#e25555"/>
+          <rect x="40" y="80" width="160" height="32" rx="10" fill="#e25555"/>
+          <g>
+            <path d="M120 80 C100 40, 60 60, 80 80 Q100 100, 120 80" fill="#ffb347" stroke="#e25555" stroke-width="4"/>
+            <path d="M120 80 C140 40, 180 60, 160 80 Q140 100, 120 80" fill="#ffb347" stroke="#e25555" stroke-width="4"/>
+            <ellipse cx="120" cy="80" rx="14" ry="10" fill="#e25555"/>
+          </g>
+        </svg>
+      </div>
+      <button id="open-present-btn" style="font-size:1.3rem; padding:1rem 2.5rem; border-radius:14px; border:none; background:#2563eb; color:#fff; font-weight:bold; cursor:pointer; box-shadow:0 2px 8px rgba(0,0,0,0.08);">Open</button>
+    </section>
+    <section id="ella-congrats-card" class="card ella-congrats-card" style="display:none; flex-direction:column; align-items:center; justify-content:center;">
+      <div style="position:relative; display:inline-block;">
+        <img src="ella-congrats.jpg" alt="Ella congrats" id="ella-congrats-img" style="max-width:320px; border-radius:16px; box-shadow:0 4px 16px rgba(0,0,0,0.15);">
+        <!-- Comic-style speech bubble -->
+        <div id="ella-speech-bubble" style="position:absolute; left:72%; top:90%; transform:translate(-50%, -100%);">
+          <div style="background:#fff; border-radius:18px; padding:0.5rem 1.2rem; box-shadow:0 2px 8px rgba(0,0,0,0.08); font-size:1.1rem; font-family:Montserrat, sans-serif; font-weight:bold; color:#333; white-space:nowrap; position:relative;">
+            Youre killing it
+            <!-- Speech bubble tail -->
+            <div style="position:absolute; left:18px; top:100%; width:0; height:0; border-left:14px solid transparent; border-right:14px solid transparent; border-top:18px solid #fff; filter:drop-shadow(0 2px 4px rgba(0,0,0,0.08));"></div>
+          </div>
+        </div>
+      </div>
+      <button id="ella-congrats-next-btn" class="next-btn" style="margin-top:2rem;">Next</button>
+    </section>
+    <section id="sudoku-puzzle-intro-card" class="card sudoku-puzzle-intro-card" style="display:none; flex-direction:column; align-items:center; justify-content:center;">
+      <div style="max-width:600px; margin:2rem auto; text-align:center; font-size:1.3rem; font-family:Montserrat, sans-serif; background:#fff; color:#111; border-radius:18px; box-shadow:0 2px 12px rgba(0,0,0,0.08); padding:2rem 2.5rem;">
+        <div style="font-size:2rem; margin-bottom:1.2rem; color:#111;">🧩 Sudoku Puzzle</div>
+        <div style="font-size:1.1rem; margin-bottom:1.5rem; color:#111;">Solve the Sudoku puzzle below. Then take the numbers from the peach-colored boxes to decode the hidden message!</div>
+      </div>
+      <button id="sudoku-puzzle-intro-next-btn" class="next-btn" style="margin-top:2rem;">Next</button>
+    </section>
+    <section id="legend-answer-card" class="card legend-answer-card" style="display:none; flex-direction:column; align-items:center; justify-content:center; min-height:400px;">
+      <div style="display:flex; flex-direction:row; justify-content:center; align-items:flex-start; margin-bottom:2rem;">
+        <div style="font-size:2rem; font-family:Montserrat,sans-serif; font-weight:bold; color:#2563eb; text-align:right; margin-right:2.5rem;">
+          <div>1</div><div>2</div><div>3</div><div>4</div><div>5</div><div>6</div><div>7</div><div>8</div><div>9</div>
+        </div>
+        <div style="font-size:2rem; font-family:Montserrat,sans-serif; font-weight:bold; color:#111; text-align:left;">
+          <div>1</div><div>E</div><div>D</div><div>J</div><div>U</div><div>6</div><div>Y</div><div>W</div><div>L</div>
+        </div>
+      </div>
+      <div style="display:flex; flex-direction:row; align-items:center; margin-top:2rem;">
+        <input id="legend-answer-input" type="text" placeholder="Type your answer..." style="font-size:1.2rem; padding:0.7rem 1.2rem; border-radius:8px; border:1.5px solid #2563eb; margin-right:1rem; min-width:220px;">
+        <button id="legend-answer-submit" style="font-size:1.1rem; padding:0.7rem 2rem; border-radius:8px; border:none; background:#2563eb; color:#fff; font-weight:bold; cursor:pointer;">Submit</button>
+      </div>
+    </section>
+  </main>
+  <div id="tickets-popup" style="display:none; position:fixed; top:0; left:0; width:100vw; height:100vh; background:rgba(0,0,0,0.7); z-index:99999; align-items:center; justify-content:center;">
+    <div style="background:#fff; border-radius:18px; box-shadow:0 4px 24px rgba(0,0,0,0.18); padding:2rem 2.5rem; text-align:center; position:relative; max-width:90vw; max-height:90vh;">
+      <img src="tickets.png" alt="Tickets" style="max-width:90vw; max-height:60vh; border-radius:12px; box-shadow:0 2px 12px rgba(0,0,0,0.08); margin-bottom:1.2rem;">
+      <br>
+      <button id="close-tickets-btn" style="margin-top:1rem; font-size:1.1rem; padding:0.5em 1.5em; border-radius:8px; border:none; background:#2563eb; color:#fff; cursor:pointer;">Close</button>
+    </div>
+  </div>
+  <section id="blog-section" class="blog-section" style="display:none; padding: 2rem 0;">
+    <div id="blog-list" style="display: flex; flex-direction: column; gap: 2rem; align-items: center;">
+      <div class="blog-card" id="dogs-blog-card" style="width: 260px; background: #fff; border-radius: 16px; box-shadow: 0 2px 12px rgba(0,0,0,0.08); overflow: hidden;">
+        <img src="dogs.jpeg" alt="Dogs" style="width:100%; height:180px; object-fit:cover;">
+        <div style="padding: 1rem; display: flex; align-items: center; gap: 0.5rem;">
+          <h3 class="blog-header" data-blog="dogs" style="color:#2563eb; cursor:pointer; margin:0;">Dog Adventures</h3>
+          <button id="view-dogs-blog-btn" style="margin-left: 0.5rem; font-size:0.95rem; padding:0.3em 0.9em; border-radius:7px; border:none; background:#2563eb; color:#fff; cursor:pointer;">View Blog</button>
+        </div>
+      </div>
+      <div class="blog-card" id="costco-blog-card" style="width: 260px; background: #fff; border-radius: 16px; box-shadow: 0 2px 12px rgba(0,0,0,0.08); overflow: hidden;">
+        <img src="costco.png" alt="Costco" style="width:100%; height:180px; object-fit:cover;">
+        <div style="padding: 1rem; display: flex; align-items: center; gap: 0.5rem;">
+          <h3 class="blog-header" data-blog="costco" style="color:#2563eb; cursor:pointer; margin:0;">Costco Chronicles</h3>
+          <button id="view-costco-blog-btn" style="margin-left: 0.5rem; font-size:0.95rem; padding:0.3em 0.9em; border-radius:7px; border:none; background:#2563eb; color:#fff; cursor:pointer;">View Blog</button>
+        </div>
+      </div>
+      <div class="blog-card" id="scott-blog-card" style="width: 260px; background: #fff; border-radius: 16px; box-shadow: 0 2px 12px rgba(0,0,0,0.08); overflow: hidden;">
+        <img src="scott.png" alt="Scott" style="width:100%; height:180px; object-fit:cover;">
+        <div style="padding: 1rem; display: flex; align-items: center; gap: 0.5rem;">
+          <h3 class="blog-header" data-blog="scott" style="color:#2563eb; cursor:pointer; margin:0;">Scott's Stories</h3>
+          <button id="view-scott-blog-btn" style="margin-left: 0.5rem; font-size:0.95rem; padding:0.3em 0.9em; border-radius:7px; border:none; background:#2563eb; color:#fff; cursor:pointer;">View Blog</button>
+        </div>
+      </div>
+      <div class="blog-card" id="crosby-blog-card" style="width: 260px; background: #fff; border-radius: 16px; box-shadow: 0 2px 12px rgba(0,0,0,0.08); overflow: hidden;">
+        <img src="crosby.png" alt="Crosby" style="width:100%; height:180px; object-fit:cover; object-position: 50% 20%;">
+        <div style="padding: 1rem; display: flex; align-items: center; gap: 0.5rem;">
+          <h3 class="blog-header" data-blog="crosby" style="color:#2563eb; cursor:pointer; margin:0;">Crosby's Corner</h3>
+          <button id="view-crosby-blog-btn" style="margin-left: 0.5rem; font-size:0.95rem; padding:0.3em 0.9em; border-radius:7px; border:none; background:#2563eb; color:#fff; cursor:pointer;">View Blog</button>
+        </div>
+      </div>
+    </div>
+    <div id="blog-post" style="display:none; max-width:600px; margin:2rem auto; background:#fff; border-radius:16px; box-shadow:0 2px 12px rgba(0,0,0,0.08); padding:2rem;">
+      <button id="blog-back-btn" style="margin-bottom:1.5rem; font-size:1rem; padding:0.5em 1.5em; border-radius:8px; border:none; background:#2563eb; color:#fff; cursor:pointer;">Back to Blog</button>
+      <div id="blog-post-content"></div>
+    </div>
+  </section>
+  <section id="gallery-section" style="display:none; padding: 2rem 0; min-height: 80vh; background: #f8fafc;">
+    <div style="text-align:center; margin-bottom:2rem; display:flex; justify-content:center; gap:1.5rem;">
+      <button id="verona-btn" style="font-size:1.1rem; padding:0.7em 2em; border-radius:10px; border:none; background:#2563eb; color:#fff; cursor:pointer; box-shadow:0 2px 8px rgba(0,0,0,0.08);">Verona</button>
+      <button id="randoms-btn" style="font-size:1.1rem; padding:0.7em 2em; border-radius:10px; border:none; background:#2563eb; color:#fff; cursor:pointer; box-shadow:0 2px 8px rgba(0,0,0,0.08);">Randoms</button>
+      <button id="snap-btn" style="font-size:1.1rem; padding:0.7em 2em; border-radius:10px; border:none; background:#2563eb; color:#fff; cursor:pointer; box-shadow:0 2px 8px rgba(0,0,0,0.08);">Snap</button>
+    </div>
+    <div id="gallery-grid" style="display:none; flex-wrap:wrap; gap:18px; justify-content:center; align-items:flex-start;"></div>
+  </section>
+  <section id="dogs-blog-section" style="display:none; position:fixed; top:0; left:0; width:100vw; height:100vh; background: url('dogs.jpeg') center center / cover no-repeat; z-index:99999; align-items:center; justify-content:center; flex-direction:column;">
+    <div style="position:absolute; top:0; left:0; width:100vw; height:100vh; background:rgba(255,255,255,0.65); z-index:0;"></div>
+    <button id="dogs-blog-back-btn" style="position:absolute; top:2rem; left:2rem; font-size:1.1rem; padding:0.5em 1.5em; border-radius:8px; border:none; background:#2563eb; color:#fff; cursor:pointer; z-index:2;">Back to Blogs</button>
+    <img src="dogsblog.png" alt="Dog Blog" style="max-width:90vw; max-height:80vh; border-radius:12px; box-shadow:0 2px 12px rgba(0,0,0,0.08); margin-top:4rem; position:relative; z-index:1;">
+  </section>
+  <section id="costco-blog-section" style="display:none; position:fixed; top:0; left:0; width:100vw; height:100vh; background: url('costco.png') center center / cover no-repeat; z-index:99999; align-items:center; justify-content:center; flex-direction:column;">
+    <div style="position:absolute; top:0; left:0; width:100vw; height:100vh; background:rgba(255,255,255,0.65); z-index:0;"></div>
+    <button id="costco-blog-back-btn" style="position:absolute; top:2rem; left:2rem; font-size:1.1rem; padding:0.5em 1.5em; border-radius:8px; border:none; background:#2563eb; color:#fff; cursor:pointer; z-index:2;">Back to Blogs</button>
+    <img src="costcoblog.png" alt="Costco Blog" style="max-width:90vw; max-height:80vh; border-radius:12px; box-shadow:0 2px 12px rgba(0,0,0,0.08); margin-top:4rem; position:relative; z-index:1;">
+  </section>
+  <section id="scott-blog-section" style="display:none; position:fixed; top:0; left:0; width:100vw; height:100vh; background: url('scott.png') center center / cover no-repeat; z-index:99999; align-items:center; justify-content:center; flex-direction:column;">
+    <div style="position:absolute; top:0; left:0; width:100vw; height:100vh; background:rgba(255,255,255,0.65); z-index:0;"></div>
+    <button id="scott-blog-back-btn" style="position:absolute; top:2rem; left:2rem; font-size:1.1rem; padding:0.5em 1.5em; border-radius:8px; border:none; background:#2563eb; color:#fff; cursor:pointer; z-index:2;">Back to Blogs</button>
+    <img src="officeblog.png" alt="Scott Blog" style="max-width:90vw; max-height:80vh; border-radius:12px; box-shadow:0 2px 12px rgba(0,0,0,0.08); margin-top:4rem; position:relative; z-index:1;">
+  </section>
+  <section id="crosby-blog-section" style="display:none; position:fixed; top:0; left:0; width:100vw; height:100vh; background: url('crosby.png') center center / cover no-repeat; z-index:99999; align-items:center; justify-content:center; flex-direction:column;">
+    <div style="position:absolute; top:0; left:0; width:100vw; height:100vh; background:rgba(255,255,255,0.65); z-index:0;"></div>
+    <button id="crosby-blog-back-btn" style="position:absolute; top:2rem; left:2rem; font-size:1.1rem; padding:0.5em 1.5em; border-radius:8px; border:none; background:#2563eb; color:#fff; cursor:pointer; z-index:2;">Back to Blogs</button>
+    <img src="crosbyblog.png" alt="Crosby Blog" style="max-width:90vw; max-height:80vh; border-radius:12px; box-shadow:0 2px 12px rgba(0,0,0,0.08); margin-top:4rem; position:relative; z-index:1;">
+  </section>
+  <script>
+console.log('Birthday board script loaded!');
+
+document.addEventListener('DOMContentLoaded', function() {
+  // Elements
+  const navHome = document.getElementById('nav-home');
+  const navAdventure = document.getElementById('nav-adventure');
+  const navBlog = document.getElementById('nav-blog');
+  const navPictures = document.getElementById('nav-pictures');
+  const startBtn = document.getElementById('start-adventure-btn');
+  const homeSection = document.getElementById('home-section');
+  const board = document.getElementById('masonry-board');
+  const wordleCard = document.getElementById('wordle-card');
+  const sudokuCard = document.getElementById('sudoku-card');
+  const paintCard = document.getElementById('paint-card');
+  const wordlePlaceholder = document.getElementById('wordle-placeholder');
+  const wordleNextBtn = document.getElementById('wordle-next-btn');
+  const introSection = document.getElementById('intro-section');
+  const introStartBtn = document.getElementById('intro-start-btn');
+  const toSudokuBtn = document.getElementById('to-sudoku-btn');
+  const sudokuInstructionsCard = document.getElementById('sudoku-instructions-card');
+  const sudokuInstructionsNextBtn = document.getElementById('sudoku-instructions-next-btn');
+  const sudokuPuzzleIntroCard = document.getElementById('sudoku-puzzle-intro-card');
+  const sudokuPuzzleIntroNextBtn = document.getElementById('sudoku-puzzle-intro-next-btn');
+  const ellaCongratsNextBtn = document.getElementById('ella-congrats-next-btn');
+  // Blog section elements
+  const blogSection = document.getElementById('blog-section');
+  const blogList = document.getElementById('blog-list');
+  const blogPost = document.getElementById('blog-post');
+  const blogBackBtn = document.getElementById('blog-back-btn');
+  const blogPostContent = document.getElementById('blog-post-content');
+  const blogHeaders = document.querySelectorAll('.blog-header');
+  const gallerySection = document.getElementById('gallery-section');
+  const galleryGrid = document.getElementById('gallery-grid');
+  const veronaBtn = document.getElementById('verona-btn');
+  const randomsBtn = document.getElementById('randoms-btn');
+  const snapBtn = document.getElementById('snap-btn');
+
+  // Show home-section on Home tab click
+  if (navHome && homeSection && board) {
+    navHome.addEventListener('click', function() {
+      homeSection.style.display = '';
+      if (introSection) introSection.style.display = 'none';
+      board.style.display = 'none';
+      if (blogSection) blogSection.style.display = 'none';
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+  }
+
+  // Show intro section on Adventure tab click
+  if (navAdventure && homeSection && board && introSection) {
+    navAdventure.addEventListener('click', function() {
+      homeSection.style.display = 'none';
+      introSection.style.display = '';
+      board.style.display = 'none';
+      if (blogSection) blogSection.style.display = 'none';
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+  }
+
+  // Show blog section on Blog tab click
+  if (navBlog && homeSection && board && introSection && blogSection) {
+    navBlog.addEventListener('click', function() {
+      homeSection.style.display = 'none';
+      board.style.display = 'none';
+      introSection.style.display = 'none';
+      blogSection.style.display = '';
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+  }
+
+  // Show gallery on Pictures tab click
+  if (navPictures && gallerySection) {
+    navPictures.addEventListener('click', function() {
+      homeSection.style.display = 'none';
+      board.style.display = 'none';
+      introSection.style.display = 'none';
+      blogSection.style.display = 'none';
+      gallerySection.style.display = '';
+      galleryGrid.style.display = 'none';
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+  }
+
+  // Show board after Start is pressed in intro
+  if (introSection && introStartBtn) {
+    introStartBtn.addEventListener('click', function() {
+      introSection.style.display = 'none';
+      board.style.display = '';
+      board.classList.add('active');
+      wordleCard.style.display = 'flex';
+      sudokuCard.style.display = 'none';
+      paintCard.style.display = 'none';
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+  }
+
+  // --- Wordle Game ---
+  const WORDLE_ANSWER = 'SMITS';
+  const MAX_GUESSES = 6;
+
+  function createWordleBoard() {
+    let guesses = [];
+    let currentGuess = '';
+    let gameOver = false;
+    let keyboardState = {};
+    wordlePlaceholder.innerHTML = `
+      <div class="wordle-board"></div>
+      <div id="wordle-keyboard" class="wordle-keyboard"></div>
+      <div id="wordle-message"></div>
+    `;
+    const boardDiv = wordlePlaceholder.querySelector('.wordle-board');
+    const keyboardDiv = document.getElementById('wordle-keyboard');
+    const message = document.getElementById('wordle-message');
+
+    // NYT keyboard layout
+    const keyboardRows = [
+      ['Q','W','E','R','T','Y','U','I','O','P'],
+      ['A','S','D','F','G','H','J','K','L'],
+      ['Enter','Z','X','C','V','B','N','M','Back']
+    ];
+
+    function renderBoard() {
+      boardDiv.innerHTML = '';
+      for (let rowIdx = 0; rowIdx < MAX_GUESSES; rowIdx++) {
+        const row = document.createElement('div');
+        row.className = 'wordle-row';
+        let guess = guesses[rowIdx];
+        for (let i = 0; i < 5; i++) {
+          const cell = document.createElement('span');
+          cell.className = 'wordle-cell';
+          if (guess) {
+            cell.textContent = guess.word[i];
+            // Set NYT-style data-state for coloring
+            if (guess.colors[i] === '#2C5F2D' || guess.colors[i] === '#2563eb' || guess.colors[i] === '#6aaa64') {
+              cell.setAttribute('data-state', 'correct');
+            } else if (guess.colors[i] === '#FFD600' || guess.colors[i] === '#c9b458') {
+              cell.setAttribute('data-state', 'present');
+            } else {
+              cell.setAttribute('data-state', 'absent');
+            }
+            if (guess.animated && guess.animated[i]) {
+              cell.classList.add('flip');
+            }
+          } else if (rowIdx === guesses.length) {
+            // Current guess row
+            cell.textContent = currentGuess[i] || '';
+          }
+          row.appendChild(cell);
+        }
+        boardDiv.appendChild(row);
+      }
+    }
+
+    function renderKeyboard() {
+      if (gameOver) {
+        keyboardDiv.innerHTML = '';
+        return;
+      }
+      keyboardDiv.innerHTML = '';
+      keyboardRows.forEach(row => {
+        const rowDiv = document.createElement('div');
+        rowDiv.className = 'keyboard-row';
+        row.forEach(key => {
+          const keyBtn = document.createElement('button');
+          keyBtn.className = 'key-btn';
+          keyBtn.textContent = key === 'Back' ? '⌫' : key;
+          keyBtn.setAttribute('data-key', key);
+          // Color keys
+          if (keyboardState[key]) {
+            keyBtn.setAttribute('data-state', keyboardState[key]);
+          }
+          keyBtn.onclick = () => handleKey(key);
+          rowDiv.appendChild(keyBtn);
+        });
+        keyboardDiv.appendChild(rowDiv);
+      });
+    }
+
+    function updateKeyboardState(guess, colors) {
+      for (let i = 0; i < 5; i++) {
+        const letter = guess[i];
+        let state = null;
+        if (colors[i] === '#2C5F2D' || colors[i] === '#2563eb' || colors[i] === '#6aaa64') {
+          state = 'correct';
+        } else if (colors[i] === '#FFD600' || colors[i] === '#c9b458') {
+          state = 'present';
+        } else {
+          state = 'absent';
+        }
+        // Only upgrade state (absent < present < correct)
+        if (!keyboardState[letter] ||
+            (keyboardState[letter] === 'absent' && state !== 'absent') ||
+            (keyboardState[letter] === 'present' && state === 'correct')) {
+          keyboardState[letter] = state;
+        }
+      }
+    }
+
+    function checkGuess(guess) {
+      guess = guess.toUpperCase();
+      let colors = Array(5).fill('#787c7e'); // NYT gray for wrong
+      let answerArr = WORDLE_ANSWER.split('');
+      let guessArr = guess.split('');
+      // First pass: correct position
+      for (let i = 0; i < 5; i++) {
+        if (guessArr[i] === answerArr[i]) {
+          colors[i] = '#6aaa64'; // NYT green
+          answerArr[i] = null;
+          guessArr[i] = null;
+        }
+      }
+      // Second pass: right letter, wrong spot
+      for (let i = 0; i < 5; i++) {
+        if (guessArr[i] && answerArr.includes(guessArr[i])) {
+          colors[i] = '#c9b458'; // NYT yellow
+          answerArr[answerArr.indexOf(guessArr[i])] = null;
+        }
+      }
+      return colors;
+    }
+
+    function handleKey(key) {
+      if (gameOver) return;
+      if (key === 'Enter') {
+        if (currentGuess.length !== 5) {
+          message.textContent = 'Please enter a 5-letter word.';
+          renderBoard();
+          return;
+        }
+        message.textContent = '';
+        let colors = checkGuess(currentGuess);
+        updateKeyboardState(currentGuess, colors);
+        guesses.push({ word: currentGuess, colors, animated: [false, false, false, false, false] });
+        renderKeyboard();
+        animateReveal(guesses.length - 1, colors, () => {
+          if (currentGuess.toUpperCase() === WORDLE_ANSWER) {
+            gameOver = true;
+            if (wordlePlaceholder.querySelector('.wordle-board')) wordlePlaceholder.querySelector('.wordle-board').style.display = 'none';
+            if (wordlePlaceholder.querySelector('#wordle-keyboard')) wordlePlaceholder.querySelector('#wordle-keyboard').style.display = 'none';
+            document.getElementById('wordle-congrats-message').style.display = 'block';
+            document.getElementById('wordle-next-btn').style.display = 'block';
+            document.removeEventListener('keydown', wordleKeyListener);
+          } else if (guesses.length >= MAX_GUESSES) {
+            gameOver = true;
+            message.textContent = `Out of guesses! The answer was ${WORDLE_ANSWER}.`;
+          }
+        });
+        currentGuess = '';
+        renderBoard();
+      } else if (key === 'Back') {
+        currentGuess = currentGuess.slice(0, -1);
+        renderBoard();
+      } else if (/^[A-Z]$/.test(key) && currentGuess.length < 5) {
+        currentGuess += key;
+        renderBoard();
+      }
+    }
+
+    function animateReveal(rowIdx, colors, callback) {
+      let i = 0;
+      function flipNext() {
+        if (!guesses[rowIdx]) return;
+        guesses[rowIdx].animated = guesses[rowIdx].animated || [false, false, false, false, false];
+        guesses[rowIdx].animated[i] = true;
+        renderBoard();
+        i++;
+        if (i < 5) {
+          setTimeout(flipNext, 320);
+        } else {
+          setTimeout(callback, 320);
+        }
+      }
+      flipNext();
+    }
+
+    // Keyboard event listeners
+    function wordleKeyListener(e) {
+      if (gameOver) return;
+      if (e.key === 'Enter') handleKey('Enter');
+      else if (e.key === 'Backspace') handleKey('Back');
+      else if (/^[a-zA-Z]$/.test(e.key)) handleKey(e.key.toUpperCase());
+    }
+    document.addEventListener('keydown', wordleKeyListener);
+
+    renderBoard();
+    renderKeyboard();
+  }
+
+  if (wordlePlaceholder) {
+    createWordleBoard();
+  }
+
+  if (toSudokuBtn && sudokuCard && wordleCard) {
+    toSudokuBtn.onclick = function() {
+      wordleCard.style.display = 'none';
+      sudokuCard.style.display = 'flex';
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    };
+  }
+
+  // On page load, show only the Wordle card
+  wordleCard.style.display = 'flex';
+  document.getElementById('ella-congrats-card').style.display = 'none';
+  sudokuInstructionsCard.style.display = 'none';
+  sudokuCard.style.display = 'none';
+
+  // Wordle Next button: show Ella congrats card only
+  if (wordleNextBtn && wordleCard) {
+    wordleNextBtn.onclick = function() {
+      wordleCard.style.display = 'none';
+      document.getElementById('ella-congrats-card').style.display = 'flex';
+      sudokuInstructionsCard.style.display = 'none';
+      sudokuCard.style.display = 'none';
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    };
+  }
+  // Ella congrats Next button: show Sudoku intro card
+  if (ellaCongratsNextBtn) {
+    ellaCongratsNextBtn.onclick = function() {
+      document.getElementById('ella-congrats-card').style.display = 'none';
+      sudokuPuzzleIntroCard.style.display = 'flex';
+      wordleCard.style.display = 'none';
+      sudokuInstructionsCard.style.display = 'none';
+      sudokuCard.style.display = 'none';
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    };
+  }
+  // Sudoku intro Next button: show Sudoku card
+  if (sudokuPuzzleIntroCard && sudokuPuzzleIntroNextBtn && sudokuCard) {
+    sudokuPuzzleIntroNextBtn.onclick = function() {
+      sudokuPuzzleIntroCard.style.display = 'none';
+      sudokuCard.style.display = 'flex';
+      wordleCard.style.display = 'none';
+      document.getElementById('ella-congrats-card').style.display = 'none';
+      sudokuInstructionsCard.style.display = 'none';
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    };
+  }
+
+  // --- Sudoku Implementation ---
+  const sudokuPlaceholder = document.getElementById('sudoku-placeholder');
+
+  // Update the Sudoku puzzle to match the image exactly
+  const sudokuPuzzle = [
+    [0, 0, 0, 0, 0, 0, 3, 0, 0],
+    [0, 0, 6, 2, 0, 1, 8, 5, 0],
+    [0, 1, 5, 0, 0, 9, 0, 4, 0],
+    [0, 0, 4, 6, 0, 3, 0, 0, 0],
+    [7, 8, 0, 1, 0, 0, 6, 2, 4],
+    [0, 6, 0, 7, 2, 4, 5, 0, 0],
+    [6, 0, 7, 0, 0, 2, 4, 8, 0],
+    [8, 0, 2, 3, 0, 7, 9, 1, 5],
+    [0, 3, 0, 9, 4, 0, 0, 0, 2]
+  ];
+  const sudokuSolution = [
+    [9,2,8,4,5,6,3,7,1],
+    [4,7,6,2,3,1,8,5,9],
+    [3,1,5,8,7,9,2,4,6],
+    [2,5,4,6,8,3,1,9,7],
+    [7,8,3,1,9,5,6,2,4],
+    [1,6,9,7,2,4,5,3,8],
+    [6,9,7,5,1,2,4,8,3],
+    [8,4,2,3,6,7,9,1,5],
+    [5,3,1,9,4,8,7,6,2]
+  ];
+  const peachCells = [
+    [4,3],
+    [4,1],
+    [6,1], [6,2], [6,6],
+    [1,6], [8,0], [8,1], [8,8],
+    [0,6]
+  ];
+
+  function renderSudoku() {
+    sudokuPlaceholder.innerHTML = '';
+    const table = document.createElement('table');
+    table.className = 'sudoku-table';
+    table.style.width = '36vw';
+    table.style.maxWidth = '320px';
+    table.style.margin = '0 auto 2rem auto';
+    table.style.borderCollapse = 'collapse';
+    for (let r = 0; r < 9; r++) {
+      const tr = document.createElement('tr');
+      for (let c = 0; c < 9; c++) {
+        const td = document.createElement('td');
+        td.className = 'sudoku-cell';
+        td.style.background = peachCells.some(([pr, pc]) => pr === r && pc === c) ? '#ffe0c2' : '#fff';
+        td.style.width = '4vw';
+        td.style.height = '4vw';
+        td.style.maxWidth = '32px';
+        td.style.maxHeight = '32px';
+        td.style.textAlign = 'center';
+        td.style.fontSize = '1.1rem';
+        td.style.fontFamily = 'Montserrat, sans-serif';
+        td.style.fontWeight = 'bold';
+        td.style.color = '#111';
+        td.style.border = '1.5px solid #222';
+        if (c % 3 === 0) td.style.borderLeft = '3.5px solid #222';
+        if (r % 3 === 0) td.style.borderTop = '3.5px solid #222';
+        if (c === 8) td.style.borderRight = '3.5px solid #222';
+        if (r === 8) td.style.borderBottom = '3.5px solid #222';
+        if (sudokuPuzzle[r][c] !== 0) {
+          td.textContent = sudokuPuzzle[r][c];
+          td.classList.add('prefilled');
+        } else {
+          const input = document.createElement('input');
+          input.type = 'text';
+          input.maxLength = 1;
+          input.pattern = '[1-9]';
+          input.className = 'sudoku-input';
+          input.style.width = '100%';
+          input.style.height = '100%';
+          input.style.textAlign = 'center';
+          input.style.fontSize = '1.1rem';
+          input.style.fontFamily = 'Montserrat, sans-serif';
+          input.style.fontWeight = 'bold';
+          input.style.border = 'none';
+          input.style.background = 'transparent';
+          td.appendChild(input);
+        }
+        tr.appendChild(td);
+      }
+      table.appendChild(tr);
+    }
+    sudokuPlaceholder.appendChild(table);
+    // Add legend underneath
+    const legend = document.createElement('div');
+    legend.className = 'sudoku-legend';
+    legend.style.margin = '2rem auto 0 auto';
+    legend.style.maxWidth = '650px';
+    legend.style.background = '#fff';
+    legend.style.borderRadius = '12px';
+    legend.style.boxShadow = '0 2px 12px rgba(0,0,0,0.08)';
+    legend.style.padding = '1.2rem 2rem';
+    legend.style.textAlign = 'center';
+    legend.style.fontSize = '1.1rem';
+    legend.innerHTML = `<b>Decoding Legend:</b><br>
+      1=A, 2=B, 3=C, 4=D, 5=E, 6=F, 7=G, 8=H, 9=I, 10=J (1), 11=K (2), ...<br>
+      <b>After solving, read the highlighted cells in order to decode your secret message!</b>`;
+    sudokuPlaceholder.appendChild(legend);
+    // Add check button
+    const checkBtn = document.createElement('button');
+    checkBtn.textContent = 'Check Solution';
+    checkBtn.className = 'next-btn';
+    checkBtn.style.marginTop = '2rem';
+    checkBtn.onclick = function() {
+      // Validate the Sudoku solution
+      const table = sudokuPlaceholder.querySelector('table');
+      let correct = true;
+      for (let r = 0; r < 9; r++) {
+        for (let c = 0; c < 9; c++) {
+          if (sudokuPuzzle[r][c] === 0) {
+            const input = table.rows[r].cells[c].querySelector('input');
+            const val = parseInt(input.value, 10);
+            if (val !== sudokuSolution[r][c]) {
+              correct = false;
+              input.style.background = '#ffd6d6';
+            } else {
+              input.style.background = '#d6ffd6';
+            }
+          }
+        }
+      }
+      if (correct) {
+        document.getElementById('sudoku-french-popup').style.display = 'flex';
+      }
+    };
+    sudokuPlaceholder.appendChild(checkBtn);
+    // Add skip button
+    const skipBtn = document.createElement('button');
+    skipBtn.textContent = 'Skip';
+    skipBtn.className = 'next-btn';
+    skipBtn.style.marginTop = '1rem';
+    skipBtn.style.marginLeft = '1rem';
+    skipBtn.style.background = '#bbb';
+    skipBtn.style.color = '#222';
+    skipBtn.onclick = function() {
+      document.getElementById('sudoku-french-popup').style.display = 'flex';
+    };
+    sudokuPlaceholder.appendChild(skipBtn);
+
+    // Add or update the French-themed popup (ensure only one exists)
+    let sudokuFrenchPopup = document.getElementById('sudoku-french-popup');
+    if (!sudokuFrenchPopup) {
+      sudokuFrenchPopup = document.createElement('div');
+      sudokuFrenchPopup.id = 'sudoku-french-popup';
+      sudokuFrenchPopup.style.display = 'none';
+      sudokuFrenchPopup.style.position = 'fixed';
+      sudokuFrenchPopup.style.top = '0';
+      sudokuFrenchPopup.style.left = '0';
+      sudokuFrenchPopup.style.width = '100vw';
+      sudokuFrenchPopup.style.height = '100vh';
+      sudokuFrenchPopup.style.background = 'rgba(0,0,0,0.5)';
+      sudokuFrenchPopup.style.zIndex = '9999';
+      sudokuFrenchPopup.style.alignItems = 'center';
+      sudokuFrenchPopup.style.justifyContent = 'center';
+      sudokuFrenchPopup.innerHTML = `
+        <div style="background:#fff; border-radius:18px; box-shadow:0 4px 24px rgba(0,0,0,0.18); padding:2rem 2.5rem; text-align:center; position:relative;">
+          <img src="ella-french.png" alt="Oui Oui!" style="max-width:320px; border-radius:12px; box-shadow:0 2px 12px rgba(0,0,0,0.08); margin-bottom:1.2rem;">
+          <div style="font-size:2rem; font-family:Montserrat,sans-serif; font-weight:bold; color:#2563eb; margin-bottom:1rem;">Oui Oui! Almost there!</div>
+          <button id="close-sudoku-french" style="margin-top:1rem; font-size:1.1rem; padding:0.5em 1.5em; border-radius:8px; border:none; background:#2563eb; color:#fff; cursor:pointer;">Close</button>
+        </div>
+      `;
+      document.body.appendChild(sudokuFrenchPopup);
+    } else {
+      sudokuFrenchPopup.style.display = 'none';
+    }
+
+    // Add close button handler for the French popup
+    setTimeout(() => {
+      const closeFrench = document.getElementById('close-sudoku-french');
+      if (closeFrench) {
+        closeFrench.onclick = function() {
+          document.getElementById('sudoku-french-popup').style.display = 'none';
+          sudokuCard.style.display = 'none';
+          document.getElementById('legend-answer-card').style.display = 'flex';
+          window.scrollTo({ top: 0, behavior: 'smooth' });
+          // Attach submit handler
+          const submitBtn = document.getElementById('legend-answer-submit');
+          const answerInput = document.getElementById('legend-answer-input');
+          if (submitBtn && answerInput) {
+            submitBtn.onclick = function() {
+              const val = answerInput.value.trim().toLowerCase().replace(/\s+/g, ' ');
+              if (val === 'wed july 16') {
+                document.getElementById('legend-answer-card').style.display = 'none';
+                paintCard.style.display = 'flex';
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+                // Restore paint-by-numbers/free painting canvas initialization
+                const paintPlaceholder = document.getElementById('paint-placeholder');
+                paintPlaceholder.innerHTML = '';
+                const paletteColors = [
+                  '#6a5acd', '#ffb347', '#77dd77', '#ff6961', '#fdfd96', '#aec6cf', '#000000', '#ffffff', '#2196f3', '#ff1493',
+                  '#8b4513', '#ffa500', '#f5cfa0', '#e0ac69', '#c68642', '#8d5524', '#b87333', '#e5b887', '#f7e7ce', '#a0522d'
+                ];
+                let selectedColor = paletteColors[0];
+                let eraserMode = false;
+                let brushSize = 6;
+                // Layout: palette on the left, canvas in the center, complete button on the right
+                paintPlaceholder.innerHTML = '';
+                const paintContainer = document.createElement('div');
+                paintContainer.style.display = 'flex';
+                paintContainer.style.justifyContent = 'center';
+                paintContainer.style.alignItems = 'flex-start';
+                paintPlaceholder.appendChild(paintContainer);
+                // Palette column
+                const paletteDiv = document.createElement('div');
+                paletteDiv.style.display = 'flex';
+                paletteDiv.style.flexDirection = 'column';
+                paletteDiv.style.alignItems = 'center';
+                paletteDiv.style.marginRight = '2rem';
+                paletteDiv.style.maxHeight = '600px';
+                paletteDiv.style.flexShrink = '0';
+                // Brush size selector
+                const brushLabel = document.createElement('label');
+                brushLabel.textContent = 'Brush Size:';
+                brushLabel.style.margin = '8px 0 2px 0';
+                brushLabel.style.fontFamily = 'Montserrat, sans-serif';
+                brushLabel.style.fontSize = '1rem';
+                paletteDiv.appendChild(brushLabel);
+                const brushSlider = document.createElement('input');
+                brushSlider.type = 'range';
+                brushSlider.min = 2;
+                brushSlider.max = 32;
+                brushSlider.value = brushSize;
+                brushSlider.style.width = '80px';
+                brushSlider.style.marginBottom = '16px';
+                brushSlider.oninput = function() {
+                  brushSize = parseInt(brushSlider.value);
+                };
+                paletteDiv.appendChild(brushSlider);
+                // Color swatches in 2 columns of 10
+                const swatchGrid = document.createElement('div');
+                swatchGrid.style.display = 'grid';
+                swatchGrid.style.gridTemplateColumns = 'repeat(2, 36px)';
+                swatchGrid.style.gridGap = '8px 8px';
+                swatchGrid.style.justifyItems = 'center';
+                swatchGrid.style.alignItems = 'center';
+                paletteColors.forEach((color, idx) => {
+                  const swatch = document.createElement('div');
+                  swatch.style.width = '32px';
+                  swatch.style.height = '32px';
+                  swatch.style.borderRadius = '50%';
+                  swatch.style.border = '2px solid #333';
+                  swatch.style.background = color;
+                  swatch.style.cursor = 'pointer';
+                  if (idx === 0) swatch.style.outline = '3px solid #2563eb';
+                  swatch.onclick = () => {
+                    selectedColor = color;
+                    eraserMode = false;
+                    Array.from(swatchGrid.children).forEach(child => child.style.outline = 'none');
+                    swatch.style.outline = '3px solid #2563eb';
+                    eraserBtn.style.outline = 'none';
+                  };
+                  swatchGrid.appendChild(swatch);
+                });
+                paletteDiv.appendChild(swatchGrid);
+                // Eraser button
+                const eraserBtn = document.createElement('button');
+                eraserBtn.textContent = 'Eraser';
+                eraserBtn.style.margin = '18px 0';
+                eraserBtn.style.padding = '8px 18px';
+                eraserBtn.style.borderRadius = '8px';
+                eraserBtn.style.border = '2px solid #333';
+                eraserBtn.style.background = '#fff';
+                eraserBtn.style.cursor = 'pointer';
+                eraserBtn.onclick = () => {
+                  eraserMode = true;
+                  Array.from(swatchGrid.children).forEach(child => child.style.outline = 'none');
+                  eraserBtn.style.outline = '3px solid #2563eb';
+                };
+                paletteDiv.appendChild(eraserBtn);
+                paintContainer.appendChild(paletteDiv);
+                // Canvas in the center
+                const canvasWrapper = document.createElement('div');
+                canvasWrapper.style.position = 'relative';
+                paintContainer.appendChild(canvasWrapper);
+                const paintCanvas = document.createElement('canvas');
+                paintCanvas.id = 'paint-free-canvas';
+                paintCanvas.width = 600;
+                paintCanvas.height = 600;
+                paintCanvas.style.border = '2px solid #333';
+                paintCanvas.style.background = '#fff';
+                paintCanvas.style.display = 'block';
+                paintCanvas.style.margin = '0 auto 1.5rem auto';
+                canvasWrapper.appendChild(paintCanvas);
+                // Complete button on the right
+                const completeDiv = document.createElement('div');
+                completeDiv.style.display = 'flex';
+                completeDiv.style.flexDirection = 'column';
+                completeDiv.style.alignItems = 'center';
+                completeDiv.style.justifyContent = 'center';
+                completeDiv.style.marginLeft = '2rem';
+                completeDiv.style.height = '600px';
+                const completeBtn = document.createElement('button');
+                completeBtn.textContent = 'Complete';
+                completeBtn.style.padding = '16px 32px';
+                completeBtn.style.fontSize = '1.2rem';
+                completeBtn.style.borderRadius = '12px';
+                completeBtn.style.border = '2px solid #2563eb';
+                completeBtn.style.background = '#2563eb';
+                completeBtn.style.color = '#fff';
+                completeBtn.style.cursor = 'pointer';
+                completeDiv.appendChild(completeBtn);
+                paintContainer.appendChild(completeDiv);
+                // Attach event handler immediately after creation
+                completeBtn.onclick = function() {
+                  paintCard.style.display = 'none';
+                  document.getElementById('final-card').style.display = 'flex';
+                  window.scrollTo({ top: 0, behavior: 'smooth' });
+                  // Attach Open button handler after final card is shown
+                  setTimeout(function() {
+                    const openPresentBtn = document.getElementById('open-present-btn');
+                    if (openPresentBtn) {
+                      openPresentBtn.onclick = function() {
+                        document.getElementById('tickets-popup').style.display = 'flex';
+                      };
+                    }
+                    const closeTicketsBtn = document.getElementById('close-tickets-btn');
+                    if (closeTicketsBtn) {
+                      closeTicketsBtn.onclick = function() {
+                        document.getElementById('tickets-popup').style.display = 'none';
+                      };
+                    }
+                  }, 100);
+                };
+                // Offscreen paint layer
+                const paintLayer = document.createElement('canvas');
+                paintLayer.width = 600;
+                paintLayer.height = 600;
+                const paintCtx = paintLayer.getContext('2d');
+                // Main canvas context
+                const ctx = paintCanvas.getContext('2d');
+                // Draw iris-black.png outline as background (only once)
+                const outlineImg = new window.Image();
+                outlineImg.src = 'iris-black.png';
+                outlineImg.onload = function() {
+                  ctx.clearRect(0, 0, paintCanvas.width, paintCanvas.height);
+                  ctx.drawImage(outlineImg, 0, 0, paintCanvas.width, paintCanvas.height);
+                  ctx.drawImage(paintLayer, 0, 0);
+                };
+                // Free painting logic
+                let painting = false;
+                let lastX = 0;
+                let lastY = 0;
+                function redraw() {
+                  ctx.clearRect(0, 0, paintCanvas.width, paintCanvas.height);
+                  ctx.drawImage(outlineImg, 0, 0, paintCanvas.width, paintCanvas.height);
+                  ctx.drawImage(paintLayer, 0, 0);
+                }
+                function startPaint(e) {
+                  painting = true;
+                  const rect = paintCanvas.getBoundingClientRect();
+                  lastX = (e.touches ? e.touches[0].clientX : e.clientX) - rect.left;
+                  lastY = (e.touches ? e.touches[0].clientY : e.clientY) - rect.top;
+                }
+                function endPaint() {
+                  painting = false;
+                }
+                function draw(e) {
+                  if (!painting) return;
+                  const rect = paintCanvas.getBoundingClientRect();
+                  const x = (e.touches ? e.touches[0].clientX : e.clientX) - rect.left;
+                  const y = (e.touches ? e.touches[0].clientY : e.clientY) - rect.top;
+                  paintCtx.strokeStyle = eraserMode ? '#fff' : selectedColor;
+                  paintCtx.lineWidth = brushSize;
+                  paintCtx.lineCap = 'round';
+                  paintCtx.beginPath();
+                  paintCtx.moveTo(lastX, lastY);
+                  paintCtx.lineTo(x, y);
+                  paintCtx.stroke();
+                  lastX = x;
+                  lastY = y;
+                  // Always redraw: outline first, then paint layer on top
+                  ctx.clearRect(0, 0, paintCanvas.width, paintCanvas.height);
+                  ctx.drawImage(outlineImg, 0, 0, paintCanvas.width, paintCanvas.height);
+                  ctx.drawImage(paintLayer, 0, 0);
+                }
+                // Mouse events
+                paintCanvas.addEventListener('mousedown', startPaint);
+                paintCanvas.addEventListener('mouseup', endPaint);
+                paintCanvas.addEventListener('mouseleave', endPaint);
+                paintCanvas.addEventListener('mousemove', draw);
+                // Touch events for mobile
+                paintCanvas.addEventListener('touchstart', startPaint);
+                paintCanvas.addEventListener('touchend', endPaint);
+                paintCanvas.addEventListener('touchcancel', endPaint);
+                paintCanvas.addEventListener('touchmove', function(e) {
+                  draw(e);
+                  e.preventDefault();
+                }, { passive: false });
+                // Redraw outline and paint layer on load
+                outlineImg.onload = redraw;
+              }
+            };
+          }
+        };
+      }
+    }, 100);
+  }
+
+  if (sudokuPlaceholder) {
+    renderSudoku();
+  }
+
+  function showConfetti() {
+    const canvas = document.getElementById('confetti-canvas');
+    if (!canvas) return;
+    const ctx = canvas.getContext('2d');
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+    canvas.style.display = 'block';
+    const confettiCount = 150;
+    const confetti = [];
+    const colors = ['#f44336','#e91e63','#9c27b0','#2196f3','#4caf50','#ffeb3b','#ff9800','#795548'];
+    for (let i = 0; i < confettiCount; i++) {
+      confetti.push({
+        x: Math.random() * canvas.width,
+        y: Math.random() * -canvas.height,
+        r: Math.random() * 6 + 4,
+        d: Math.random() * confettiCount,
+        color: colors[Math.floor(Math.random() * colors.length)],
+        tilt: Math.random() * 10 - 10,
+        tiltAngleIncremental: Math.random() * 0.07 + 0.05,
+        tiltAngle: 0
+      });
+    }
+    let angle = 0;
+    let tiltAngle = 0;
+    let animationFrame;
+    function draw() {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      for (let i = 0; i < confettiCount; i++) {
+        let c = confetti[i];
+        ctx.beginPath();
+        ctx.lineWidth = c.r;
+        ctx.strokeStyle = c.color;
+        ctx.moveTo(c.x + c.tilt + c.r / 3, c.y);
+        ctx.lineTo(c.x + c.tilt, c.y + c.tilt + c.r);
+        ctx.stroke();
+      }
+      update();
+    }
+    function update() {
+      angle += 0.01;
+      tiltAngle += 0.1;
+      for (let i = 0; i < confettiCount; i++) {
+        let c = confetti[i];
+        c.y += (Math.cos(angle + c.d) + 3 + c.r / 2) / 2;
+        c.x += Math.sin(angle);
+        c.tiltAngle += c.tiltAngleIncremental;
+        c.tilt = Math.sin(c.tiltAngle) * 15;
+        if (c.y > canvas.height) {
+          c.x = Math.random() * canvas.width;
+          c.y = -10;
+        }
+      }
+    }
+    function loop() {
+      draw();
+      animationFrame = requestAnimationFrame(loop);
+    }
+    loop();
+    setTimeout(() => {
+      cancelAnimationFrame(animationFrame);
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      canvas.style.display = 'none';
+    }, 1800);
+  }
+
+  // Add after paintCard and paintPlaceholder are defined
+  if (paintCard && document.getElementById('paint-placeholder')) {
+    const paintPlaceholder = document.getElementById('paint-placeholder');
+    paintPlaceholder.innerHTML = '';
+    // Layout: palette on the left, canvas on the right
+    const paintContainer = document.createElement('div');
+    paintContainer.style.display = 'flex';
+    paintContainer.style.justifyContent = 'center';
+    paintContainer.style.alignItems = 'flex-start';
+    paintPlaceholder.appendChild(paintContainer);
+    // Palette
+    const paletteDiv = document.createElement('div');
+    paletteDiv.style.display = 'flex';
+    paletteDiv.style.flexDirection = 'column';
+    paletteDiv.style.alignItems = 'center';
+    paletteDiv.style.marginRight = '2rem';
+    const colors = ['#6a5acd', '#ffb347', '#77dd77', '#ff6961', '#fdfd96', '#aec6cf'];
+    let selectedColor = colors[0];
+    colors.forEach((color, idx) => {
+      const swatch = document.createElement('div');
+      swatch.style.width = '32px';
+      swatch.style.height = '32px';
+      swatch.style.margin = '12px 0';
+      swatch.style.borderRadius = '50%';
+      swatch.style.border = '2px solid #333';
+      swatch.style.background = color;
+      swatch.style.cursor = 'pointer';
+      if (idx === 0) swatch.style.outline = '3px solid #2563eb';
+      swatch.onclick = () => {
+        selectedColor = color;
+        Array.from(paletteDiv.children).forEach(child => child.style.outline = 'none');
+        swatch.style.outline = '3px solid #2563eb';
+      };
+      paletteDiv.appendChild(swatch);
+    });
+    paintContainer.appendChild(paletteDiv);
+    // Canvas
+    const paintCanvas = document.createElement('canvas');
+    paintCanvas.id = 'paint-by-numbers-canvas';
+    paintCanvas.width = 400;
+    paintCanvas.height = 400;
+    paintCanvas.style.border = '2px solid #333';
+    paintCanvas.style.background = '#fff';
+    paintCanvas.style.display = 'block';
+    paintCanvas.style.margin = '0 auto 1.5rem auto';
+    paintContainer.appendChild(paintCanvas);
+    // Load and draw the iris-black.png image as the background
+    const img = new window.Image();
+    img.src = 'iris-black.png';
+    img.onload = function() {
+      const ctx = paintCanvas.getContext('2d');
+      ctx.drawImage(img, 0, 0, paintCanvas.width, paintCanvas.height);
+      // Demo: overlay simple numbered regions (rectangles)
+      const regions = [
+        {x:40, y:40, w:80, h:80, n:1, color:'#6a5acd'},
+        {x:160, y:40, w:80, h:80, n:2, color:'#ffb347'},
+        {x:280, y:40, w:80, h:80, n:3, color:'#77dd77'},
+        {x:100, y:180, w:80, h:80, n:4, color:'#ff6961'},
+        {x:220, y:180, w:80, h:80, n:5, color:'#fdfd96'},
+        {x:160, y:300, w:80, h:80, n:6, color:'#aec6cf'}
+      ];
+      regions.forEach(region => {
+        ctx.strokeStyle = '#333';
+        ctx.lineWidth = 2;
+        ctx.strokeRect(region.x, region.y, region.w, region.h);
+        ctx.font = 'bold 32px Montserrat, sans-serif';
+        ctx.fillStyle = '#333';
+        ctx.fillText(region.n, region.x + region.w/2 - 10, region.y + region.h/2 + 10);
+      });
+      // Store painted colors
+      const painted = {};
+      paintCanvas.onclick = function(e) {
+        const rect = paintCanvas.getBoundingClientRect();
+        const mx = e.clientX - rect.left;
+        const my = e.clientY - rect.top;
+        for (let region of regions) {
+          if (mx >= region.x && mx <= region.x+region.w && my >= region.y && my <= region.y+region.h) {
+            // Only allow correct color for the region
+            if (selectedColor === region.color) {
+              painted[region.n] = selectedColor;
+              // Redraw
+              ctx.clearRect(0, 0, paintCanvas.width, paintCanvas.height);
+              ctx.drawImage(img, 0, 0, paintCanvas.width, paintCanvas.height);
+              regions.forEach(region2 => {
+                ctx.strokeStyle = '#333';
+                ctx.lineWidth = 2;
+                ctx.strokeRect(region2.x, region2.y, region2.w, region2.h);
+                if (painted[region2.n]) {
+                  ctx.fillStyle = painted[region2.n];
+                  ctx.globalAlpha = 0.7;
+                  ctx.fillRect(region2.x, region2.y, region2.w, region2.h);
+                  ctx.globalAlpha = 1.0;
+                }
+                ctx.font = 'bold 32px Montserrat, sans-serif';
+                ctx.fillStyle = '#333';
+                ctx.fillText(region2.n, region2.x + region2.w/2 - 10, region2.y + region2.h/2 + 10);
+              });
+            } else {
+              // Optional: feedback for wrong color (e.g., shake or flash)
+            }
+            break;
+          }
+        }
+      };
+    };
+  }
+
+  // Add event handler for the Open button to show the tickets popup
+  const openPresentBtn = document.getElementById('open-present-btn');
+  if (openPresentBtn) {
+    openPresentBtn.onclick = function() {
+      document.getElementById('tickets-popup').style.display = 'flex';
+    };
+  }
+  // Add event handler for the Close button in the popup
+  const closeTicketsBtn = document.getElementById('close-tickets-btn');
+  if (closeTicketsBtn) {
+    closeTicketsBtn.onclick = function() {
+      document.getElementById('tickets-popup').style.display = 'none';
+    };
+  }
+
+  // Add blog navigation and logic at the end of DOMContentLoaded
+  const blogPosts = {
+    dogs: {
+      title: 'Dog Adventures',
+      content: '<p>This is a placeholder for the Dog Adventures post. Add your story here!</p>'
+    },
+    costco: {
+      title: 'Costco Chronicles',
+      content: '<p>This is a placeholder for the Costco Chronicles post. Add your story here!</p>'
+    },
+    scott: {
+      title: 'Scott\'s Stories',
+      content: '<p>This is a placeholder for Scott\'s Stories post. Add your story here!</p>'
+    },
+    crosby: {
+      title: 'Crosby\'s Corner',
+      content: '<p>This is a placeholder for Crosby\'s Corner post. Add your story here!</p>'
+    }
+  };
+  blogHeaders.forEach(header => {
+    const key = header.getAttribute('data-blog');
+    if (key !== 'dogs') {
+      header.onclick = function() {
+        if (blogPosts[key]) {
+          blogList.style.display = 'none';
+          blogPost.style.display = 'block';
+          blogPostContent.innerHTML = `<h2 style=\"color:#2563eb;\">${blogPosts[key].title}</h2>` + blogPosts[key].content;
+        }
+      };
+    }
+  });
+  if (blogBackBtn) {
+    blogBackBtn.onclick = function() {
+      blogPost.style.display = 'none';
+      blogList.style.display = 'flex';
+    };
+  }
+
+  // Add view blog button handler with debug log
+  const viewDogsBlogBtn = document.getElementById('view-dogs-blog-btn');
+  const dogsBlogSection = document.getElementById('dogs-blog-section');
+  const dogsBlogBackBtn = document.getElementById('dogs-blog-back-btn');
+  if (viewDogsBlogBtn && dogsBlogSection) {
+    viewDogsBlogBtn.onclick = function(event) {
+      event.stopPropagation();
+      console.log('View Blog button clicked');
+      if (window.getComputedStyle(blogSection).display !== 'none') {
+        blogSection.style.display = 'none';
+      }
+      dogsBlogSection.style.display = 'flex';
+      dogsBlogSection.style.zIndex = '99999';
+    };
+  }
+  if (dogsBlogBackBtn && dogsBlogSection) {
+    dogsBlogBackBtn.onclick = function() {
+      dogsBlogSection.style.display = 'none';
+      blogSection.style.display = '';
+    };
+  }
+
+  // Add view blog button handler with debug log
+  const viewCostcoBlogBtn = document.getElementById('view-costco-blog-btn');
+  const costcoBlogSection = document.getElementById('costco-blog-section');
+  const costcoBlogBackBtn = document.getElementById('costco-blog-back-btn');
+  if (viewCostcoBlogBtn && costcoBlogSection) {
+    viewCostcoBlogBtn.onclick = function(event) {
+      event.stopPropagation();
+      blogSection.style.display = 'none';
+      costcoBlogSection.style.display = 'flex';
+      costcoBlogSection.style.zIndex = '99999';
+    };
+  }
+  if (costcoBlogBackBtn && costcoBlogSection) {
+    costcoBlogBackBtn.onclick = function() {
+      costcoBlogSection.style.display = 'none';
+      blogSection.style.display = '';
+    };
+  }
+
+  // Add view blog button handler with debug log
+  const viewScottBlogBtn = document.getElementById('view-scott-blog-btn');
+  const scottBlogSection = document.getElementById('scott-blog-section');
+  const scottBlogBackBtn = document.getElementById('scott-blog-back-btn');
+  if (viewScottBlogBtn && scottBlogSection) {
+    viewScottBlogBtn.onclick = function(event) {
+      event.stopPropagation();
+      blogSection.style.display = 'none';
+      scottBlogSection.style.display = 'flex';
+      scottBlogSection.style.zIndex = '99999';
+    };
+  }
+  if (scottBlogBackBtn && scottBlogSection) {
+    scottBlogBackBtn.onclick = function() {
+      scottBlogSection.style.display = 'none';
+      blogSection.style.display = '';
+    };
+  }
+
+  // Add view blog button handler with debug log
+  const viewCrosbyBlogBtn = document.getElementById('view-crosby-blog-btn');
+  const crosbyBlogSection = document.getElementById('crosby-blog-section');
+  const crosbyBlogBackBtn = document.getElementById('crosby-blog-back-btn');
+  if (viewCrosbyBlogBtn && crosbyBlogSection) {
+    viewCrosbyBlogBtn.onclick = function(event) {
+      event.stopPropagation();
+      blogSection.style.display = 'none';
+      crosbyBlogSection.style.display = 'flex';
+      crosbyBlogSection.style.zIndex = '99999';
+    };
+  }
+  if (crosbyBlogBackBtn && crosbyBlogSection) {
+    crosbyBlogBackBtn.onclick = function() {
+      crosbyBlogSection.style.display = 'none';
+      blogSection.style.display = '';
+    };
+  }
+
+  // Show all images in pics folder on Verona button click
+  if (veronaBtn && galleryGrid) {
+    veronaBtn.addEventListener('click', function() {
+      const imageFiles = [
+        'ella1.jpeg','ella3.jpeg','ella4.jpeg','ella5.jpeg','ella8.jpeg','ella9.jpeg','ella14.jpeg','ella16.jpeg','ella17.jpeg','ella19.jpeg','ella21.jpeg','ella22.jpeg','ella27.jpeg','ella30.jpeg','ella32.jpeg','ella33.jpeg','ella35.jpeg','ella38.jpeg','ella39.jpeg','ella41.jpeg','ella44.jpeg','ella45.jpeg','ella52.jpeg','ella54.jpeg','ella59.jpeg','ella61.jpeg','ella64.jpeg','ella65.jpeg','ella67.JPG','ella68.JPG','ella71.jpeg','ella73.jpeg','ella74.jpeg','ella75.jpeg','ella78.jpeg','ella79.jpeg','ella83.jpeg','ella84.jpeg','ella85.jpeg','ella92.JPG','ella94.jpeg','ella95.jpeg','ella97.jpeg','ella105.jpeg','ella108.jpeg','ella111.jpeg','ella112.jpeg','ella114.jpeg','ella121.jpeg','ella123.jpeg','ella124.jpeg','ella126.JPG','ella127.jpeg','ella130.jpeg','ella132.jpeg','ella135.jpeg','ella136.jpeg','ella137.JPG','ella139.jpeg','ella147.jpeg','ella148.jpeg','ella152.jpeg','ella154.jpeg','ella155.jpeg','ella158.jpeg','ella161.jpeg','ella166.jpeg','ella167.jpeg','ella168.jpeg','ella170.jpeg','ella171.JPG','ella172.jpeg','ella173.jpeg','ella177.jpeg','ella178.jpeg','ella181.jpeg','ella182.jpeg','ella184.jpeg','ella189.jpeg','ella197.JPG','ella198.jpeg','ella203.jpeg','ella204.JPG','ella207.jpeg','ella208.jpeg','ella213.jpeg','ella214.jpeg','ella217.jpeg','ella218.jpeg','ella220.jpeg','ella223.JPG','ella235.jpeg','ella236.jpeg','ella244.JPG','ella249.jpeg','ella251.jpeg','ella253.jpeg','ella254.jpeg','ella256.JPG','ella257.jpeg'
+      ];
+      galleryGrid.innerHTML = '';
+      imageFiles.forEach(name => {
+        const img = document.createElement('img');
+        img.src = `pics/${name}`;
+        img.alt = name;
+        img.style = 'max-width: 220px; max-height: 220px; border-radius: 14px; box-shadow:0 2px 8px rgba(0,0,0,0.10); background:#fff; object-fit:cover;';
+        galleryGrid.appendChild(img);
+      });
+      galleryGrid.style.display = 'flex';
+    });
+  }
+  // Show all images in randoms folder on Randoms button click
+  if (randomsBtn && galleryGrid) {
+    randomsBtn.addEventListener('click', function() {
+      const imageFiles = [
+        'random1.JPG','random2.JPG','random3.JPG','random4.JPG','random5.JPG','random6.JPG','random7.JPG','random8.JPG','random9.JPG','random10.HEIC','random11.JPEG','random12.HEIC','random13.HEIC','random14.HEIC','random15.JPG','random16.HEIC','random17.JPG','random18.JPG','random19.JPG','random20.HEIC','random21.JPEG','random22.JPEG','random23.HEIC','random24.JPG','random25.JPG','random26.JPG','random27.JPEG','random28.HEIC','random29.JPG','random30.HEIC','random31.HEIC','random32.JPG','random33.JPG','random34.JPG'
+      ];
+      galleryGrid.innerHTML = '';
+      imageFiles.forEach(name => {
+        const img = document.createElement('img');
+        img.src = `randoms/${name}`;
+        img.alt = name;
+        img.style = 'max-width: 220px; max-height: 220px; border-radius: 14px; box-shadow:0 2px 8px rgba(0,0,0,0.10); background:#fff; object-fit:cover;';
+        galleryGrid.appendChild(img);
+      });
+      galleryGrid.style.display = 'flex';
+    });
+  }
+  // Show all images in snap folder on Snap button click
+  if (snapBtn && galleryGrid) {
+    snapBtn.addEventListener('click', function() {
+      const imageFiles = [
+        'snap1.JPG','snap2.JPG','snap3.JPG','snap4.JPG','snap5.JPG','snap6.JPG','snap7.JPG','snap8.JPG','snap9.JPG','snap10.JPG','snap11.JPG','snap12.JPG','snap13.JPG','snap14.JPG','snap15.JPG','snap16.JPG','snap17.JPG','snap18.JPG','snap19.JPG','snap20.JPG','snap21.JPG','snap22.JPG','snap23.JPG','snap24.JPG','snap25.JPG'
+      ];
+      galleryGrid.innerHTML = '';
+      imageFiles.forEach(name => {
+        const img = document.createElement('img');
+        img.src = `snap/${name}`;
+        img.alt = name;
+        img.style = 'max-width: 220px; max-height: 220px; border-radius: 14px; box-shadow:0 2px 8px rgba(0,0,0,0.10); background:#fff; object-fit:cover;';
+        galleryGrid.appendChild(img);
+      });
+      galleryGrid.style.display = 'flex';
+    });
+  }
+});
+</script>
+<style>
+.wordle-card {
+  margin-top: 2.5rem !important;
+}
+</style>
+</body>
+</html> 
